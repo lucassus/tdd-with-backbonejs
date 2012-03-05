@@ -39,6 +39,35 @@ describe('TodoList.Collections.Tasks', function() {
         expect(request).toHaveUrl('/tasks.json')
       });
     });
+
+    describe('on success', function() {
+      beforeEach(function() {
+        var fixtures = { tasks: [
+          { id: 11, name: 'First task', complete: false },
+          { id: 12, name: 'Second task', complete: true }
+        ] };
+
+        server.respondWith('GET', '/tasks.json',
+          [
+            200,
+            { "Content-Type": "application/json" },
+            JSON.stringify(fixtures)
+          ]
+        );
+
+        tasks.fetch();
+      });
+
+      it('should parse tasks from the response', function() {
+        server.respond();
+
+        expect(tasks.models.length).toEqual(2);
+        expect(tasks.get(11).getName()).toEqual('First task');
+        expect(tasks.get(11).getComplete()).toEqual(false);
+        expect(tasks.get(12).getName()).toEqual('Second task');
+        expect(tasks.get(12).getComplete()).toEqual(true);
+      });
+    });
   });
 
 });
