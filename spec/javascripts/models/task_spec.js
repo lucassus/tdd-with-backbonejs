@@ -83,7 +83,7 @@ describe('TodoList.Models.Task', function() {
         });
 
         it('should be POST', function() {
-          expect(request.method).toEqual('POST');
+          expect(request).toHaveMethod('POST');
         });
 
         it('should be sync', function() {
@@ -110,7 +110,7 @@ describe('TodoList.Models.Task', function() {
         });
 
         it('should be PUT', function() {
-          expect(request.method).toEqual('PUT');
+          expect(request).toHaveMethod('PUT');
         });
 
         it('should be sync', function() {
