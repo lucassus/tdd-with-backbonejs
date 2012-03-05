@@ -86,12 +86,12 @@ describe('TodoList.Models.Task', function() {
           expect(request).toHaveMethod('POST');
         });
 
-        it('should be sync', function() {
-          expect(request.async).toBeTruthy();
+        it('should be async', function() {
+          expect(request).toBeAsync();
         });
 
         it('should have valid url', function() {
-          expect(request.url).toEqual('/tasks.json')
+          expect(request).toHaveUrl('/tasks.json');
         });
 
         it('should send valid data', function() {
@@ -113,12 +113,12 @@ describe('TodoList.Models.Task', function() {
           expect(request).toHaveMethod('PUT');
         });
 
-        it('should be sync', function() {
-          expect(request.async).toBeTruthy();
+        it('should be async', function() {
+          expect(request).toBeAsync();
         });
 
         it('should have valid url', function() {
-          expect(request.url).toEqual('/tasks/66.json')
+          expect(request).toHaveUrl('/tasks/66.json')
         });
 
         it('should send valid data', function() {
