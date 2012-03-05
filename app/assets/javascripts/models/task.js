@@ -1,1 +1,8 @@
-TodoList.Models.Task = {};
+TodoList.Models.Task = Backbone.Model.extend({
+
+  defaults: {
+    name: '',
+    complete: false
+  }
+
+});
