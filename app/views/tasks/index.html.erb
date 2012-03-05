@@ -1,0 +1,13 @@
+<form id="new-task-form" class="well form-inline" action="<%= tasks_path %>" method="POST">
+  <label>
+    New task name
+    <input id="todo-name" type="text" name="todo[name]" class="span3" placeholder="Something to do…">
+  </label>
+  <button type="submit" class="btn submit">Add</button>
+</form>
+
+<div id="tasks-list">
+  <table class="table table-striped">
+    <tbody></tbody>
+  </table>
+</div>
