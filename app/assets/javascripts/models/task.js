@@ -5,6 +5,18 @@ TodoList.Models.Task = Backbone.Model.extend({
     complete: false
   },
 
+  url: function() {
+    if (this.isNew()) {
+      return "/tasks.json";
+    } else {
+      return "/tasks/" + this.id + ".json";
+    }
+  },
+
+  toJSON: function() {
+    return { task: this.attributes };
+  },
+
   validate: function(attrs) {
     if (attrs.name === null || attrs.name === "") return "Task name can't be blank";
   },

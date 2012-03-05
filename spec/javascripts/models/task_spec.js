@@ -57,4 +57,78 @@ describe('TodoList.Models.Task', function() {
     });
   });
 
+  describe('#save', function() {
+    var server = null;
+
+    beforeEach(function() {
+      server = sinon.fakeServer.create();
+    });
+
+    afterEach(function() {
+      server.restore();
+    });
+
+    describe('request', function() {
+      var request = null;
+
+      beforeEach(function() {
+        task.set({ name: 'New task to do' });
+      });
+
+      describe('on create', function() {
+        beforeEach(function() {
+          task.set({ id: null });
+          task.save();
+          request = server.requests[0];
+        });
+
+        it('should be POST', function() {
+          expect(request.method).toEqual('POST');
+        });
+
+        it('should be sync', function() {
+          expect(request.async).toBeTruthy();
+        });
+
+        it('should have valid url', function() {
+          expect(request.url).toEqual('/tasks.json')
+        });
+
+        it('should send valid data', function() {
+          var params = JSON.parse(request.requestBody);
+          expect(params.task).toBeDefined();
+          expect(params.task.name).toEqual('New task to do');
+          expect(params.task.complete).toBeFalsy();
+        });
+      });
+
+      describe('on update', function() {
+        beforeEach(function() {
+          task.id = 66;
+          task.save();
+          request = server.requests[0];
+        });
+
+        it('should be PUT', function() {
+          expect(request.method).toEqual('PUT');
+        });
+
+        it('should be sync', function() {
+          expect(request.async).toBeTruthy();
+        });
+
+        it('should have valid url', function() {
+          expect(request.url).toEqual('/tasks/66.json')
+        });
+
+        it('should send valid data', function() {
+          var params = JSON.parse(request.requestBody);
+          expect(params.task).toBeDefined();
+          expect(params.task.name).toEqual('New task to do');
+          expect(params.task.complete).toBeFalsy();
+        });
+      });
+    });
+  });
+
 });
