@@ -1,13 +1,24 @@
 <form id="new-task-form" class="well form-inline" action="<%= tasks_path %>" method="POST">
   <label>
     New task name
-    <input id="todo-name" type="text" name="todo[name]" class="span3" placeholder="Something to do…">
+    <input type="text" name="task[name]" class="span3" placeholder="Something to do…">
   </label>
   <button type="submit" class="btn submit">Add</button>
 </form>
 
 <div id="tasks-list">
   <table class="table table-striped">
-    <tbody></tbody>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td>#<%= task.id %></td>
+          <td><%= task.name %></td>
+          <td>
+            <%= link_to 'Complete', task_path(task, :params => { :task => { :complete => true } }), :method => :put,
+                :class => 'complete btn btn-mini btn-success' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 </div>

@@ -1,21 +1,27 @@
 class TasksController < ApplicationController
 
   def index
+    @tasks = Task.incomplete
+
     respond_to do |format|
       format.html
       format.json do
-        tasks = Task.incomplete
-        render :json => { :tasks => tasks }
+        render :json => { :tasks => @tasks }
       end
     end
   end
 
   def create
-    respond_to do |format|
-      format.json do
-        todo = Task.new(params[:task])
+    todo = Task.new(params[:task])
+    success = todo.save
 
-        if todo.save
+    respond_to do |format|
+      format.html do
+        redirect_to root_path
+      end
+
+      format.json do
+        if success
             render :json => todo, :status => :created
         else
           render :json => { :errors => todo.errors }, :status => :unprocessable_entity
@@ -25,11 +31,16 @@ class TasksController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      format.json do
-        todo = Task.incomplete.find(params[:id])
+    todo = Task.incomplete.find(params[:id])
+    success = todo.update_attributes(params[:task])
 
-        if todo.update_attributes(params[:task])
+    respond_to do |format|
+      format.html do
+        redirect_to root_path
+      end
+
+      format.json do success
+        if
           render :json => { :task => todo }
         else
           render :json => {}, :status => :unprocessable_entity
