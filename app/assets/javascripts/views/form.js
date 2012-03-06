@@ -8,7 +8,13 @@ TodoList.Views.Form = Backbone.View.extend({
     if (event) event.preventDefault();
 
     var attributes = this.getAttributes();
-    this.collection.create(attributes);
+
+    var self = this;
+    this.collection.create(attributes, {
+      success: function() {
+        self.$("input[name='task[name]']").val('');
+      }
+    });
   },
 
   getAttributes: function() {

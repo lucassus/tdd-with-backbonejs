@@ -71,8 +71,26 @@ describe('TodoList.Views.Form', function() {
     });
 
     describe('on success', function () {
-      it('should clear the form input', function () {
+      beforeEach(function () {
+        var fixtures = {};
+        server.respondWith('POST', '/tasks.json',
+            [
+              200,
+              { "Content-Type":"application/json" },
+              JSON.stringify(fixtures)
+            ]
+        );
+      });
 
+      it('should clear the form input', function () {
+        var $nameInput = $formFixture.find('input');
+        $nameInput.val('New task name');
+
+        view.submit();
+        expect($nameInput).toHaveValue('New task name');
+
+        server.respond();
+        expect($nameInput).toHaveValue('');
       });
 
       it('should reload the page', function () {
