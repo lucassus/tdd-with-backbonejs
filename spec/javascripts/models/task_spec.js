@@ -22,7 +22,7 @@ describe('TodoList.Models.Task', function() {
     });
 
     it('should return task id', function() {
-      stub = sinon.stub(task, 'get').returns('Task name');
+      var stub = sinon.stub(task, 'get').returns('Task name');
 
       expect(task.getName()).toEqual('Task name');
       expect(stub.calledWith('name')).toBeTruthy();
@@ -35,7 +35,7 @@ describe('TodoList.Models.Task', function() {
     });
 
     it('should return task id', function() {
-      stub = sinon.stub(task, 'get').returns(false);
+      var stub = sinon.stub(task, 'get').returns(false);
 
       expect(task.getComplete()).toEqual(false);
       expect(stub.calledWith('complete')).toBeTruthy();
@@ -46,12 +46,12 @@ describe('TodoList.Models.Task', function() {
     it('should validate presence of name', function() {
       var invalidNames = [null, ""];
       _.each(invalidNames, function(invalidName) {
-          spy = sinon.spy();
+          var spy = sinon.spy();
           task.set({ name: invalidName }, { error: spy });
           expect(spy.calledWith(task, "Task name can't be blank")).toBeTruthy();
       });
 
-      spy = sinon.spy();
+      var spy = sinon.spy();
       task.set({ name: 'Valid name' }, { error: spy });
       expect(spy.called).toBeFalsy();
     });

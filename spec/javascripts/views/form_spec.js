@@ -4,15 +4,33 @@ describe('TodoList.Views.Form', function() {
     expect(TodoList.Views.Form).toBeDefined();
   });
 
-  var view;
+  var view, $formFixture;
 
   beforeEach(function() {
-    view = new TodoList.Views.Form();
+    loadFixtures('form-fixture.html');
+    $formFixture = $('#form-fixture');
+
+    view = new TodoList.Views.Form({ el: $formFixture });
   });
 
   describe('events', function() {
     it('should handle click event on submit button', function() {
       expect(view.events['click submit.button']).toEqual('submit');
+    });
+  });
+
+  describe('#getAttributes', function () {
+    it('should be defined', function() {
+      expect(view.getAttributes).toBeDefined();
+    });
+
+    it('should return valid attributes', function () {
+      $formFixture.find('input').val('Do something');
+      var attributes = view.getAttributes();
+
+      expect(attributes).toBeDefined();
+      expect(attributes.name).toBeDefined();
+      expect(attributes.name).toEqual('Do something');
     });
   });
 
@@ -23,7 +41,7 @@ describe('TodoList.Views.Form', function() {
 
     it('should prevent default action', function() {
       var event = { preventDefault: function() {} };
-      mock = sinon.mock(event).expects('preventDefault').once();
+      var mock = sinon.mock(event).expects('preventDefault').once();
       view.submit(event);
       mock.verify();
     });
