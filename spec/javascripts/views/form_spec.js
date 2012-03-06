@@ -16,7 +16,7 @@ describe('TodoList.Views.Form', function() {
 
   describe('events', function() {
     it('should handle click event on submit button', function() {
-      expect(view.events['click submit.button']).toEqual('submit');
+      expect(view.events['click button.submit']).toEqual('submit');
     });
   });
 
