@@ -19,7 +19,7 @@ TodoList.Views.Form = Backbone.View.extend({
   },
 
   resetForm: function() {
-    this.$("input[name='task[name]']").val('');
+    this.getInputFor('name').val('');
   },
 
   handleErrors: function(task, response) {
@@ -31,7 +31,11 @@ TodoList.Views.Form = Backbone.View.extend({
 
   getAttributes: function() {
     return {
-      name: this.$("input[name='task[name]']").val()
+      name: this.getInputFor('name').val()
     };
+  },
+
+  getInputFor: function(name) {
+    return this.$("input[name='task[" + name + "]']");
   }
 });

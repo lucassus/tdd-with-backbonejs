@@ -20,6 +20,12 @@ describe('TodoList.Views.Form', function() {
     });
   });
 
+  describe('#getInputFor', function () {
+    it('should return form input for given name', function () {
+      expect(view.getInputFor('name')).toBe($formFixture.find('input'));
+    });
+  });
+
   describe('#getAttributes', function () {
     it('should be defined', function() {
       expect(view.getAttributes).toBeDefined();
