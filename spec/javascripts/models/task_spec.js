@@ -42,21 +42,6 @@ describe('TodoList.Models.Task', function() {
     });
   });
 
-  describe('validations', function() {
-    it('should validate presence of name', function() {
-      var invalidNames = [null, ""];
-      _.each(invalidNames, function(invalidName) {
-          var spy = sinon.spy();
-          task.set({ name: invalidName }, { error: spy });
-          expect(spy.calledWith(task, "Task name can't be blank")).toBeTruthy();
-      });
-
-      var spy = sinon.spy();
-      task.set({ name: 'Valid name' }, { error: spy });
-      expect(spy.called).toBeFalsy();
-    });
-  });
-
   describe('#save', function() {
     var server = null;
 

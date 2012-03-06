@@ -17,10 +17,6 @@ TodoList.Models.Task = Backbone.Model.extend({
     return { task: this.attributes };
   },
 
-  validate: function(attrs) {
-    if (attrs.name === null || attrs.name === "") return "Task name can't be blank";
-  },
-
   getName: function() {
     return this.get('name');
   },

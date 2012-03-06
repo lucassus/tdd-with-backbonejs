@@ -92,19 +92,29 @@ describe('TodoList.Views.Form', function() {
         server.respond();
         expect($nameInput).toHaveValue('');
       });
-
-      it('should reload the page', function () {
-
-      });
     });
 
     describe('on error', function () {
-      it('should display validation messages', function () {
-
+      beforeEach(function () {
+        server.respondWith('POST', '/tasks.json',
+            [
+              422,
+              { "Content-Type":"application/json" },
+              JSON.stringify({ errors: { name: "can't be blank" } })
+            ]
+        );
       });
 
-      it('should not clear the form input', function () {
+      it('should display validation messages', function () {
+        var $nameInput = $formFixture.find('input');
+        $nameInput.val('');
 
+        var mock = sinon.mock(window).expects('alert').withArgs("Task name can't be blank");
+
+        view.submit();
+        server.respond();
+
+        mock.verify();
       });
     });
   });

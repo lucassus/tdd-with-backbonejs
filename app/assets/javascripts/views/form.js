@@ -13,6 +13,12 @@ TodoList.Views.Form = Backbone.View.extend({
     this.collection.create(attributes, {
       success: function() {
         self.$("input[name='task[name]']").val('');
+      },
+      error: function(task, response) {
+        var errors = JSON.parse(response.responseText).errors
+        if (errors.name) {
+          alert("Task name " + errors.name);
+        }
       }
     });
   },
