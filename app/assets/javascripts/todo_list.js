@@ -1,4 +1,10 @@
+//= require jquery
+//= require jquery_ujs
+//= require underscore
+//= require backbone
+
 //= require_self
+
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections
@@ -14,7 +20,7 @@ window.TodoList = {
     var collection = new TodoList.Collections.Tasks();
 
     var $form = $('form#new-task-form');
-    var formView = new TodoList.Views.Form({ el: $form, collection: collection });
+    new TodoList.Views.Form({ el: $form, collection: collection });
 
     var list = new TodoList.Views.List({ collection: collection });
     $('#tasks-list').html(list.render().el);

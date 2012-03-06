@@ -72,7 +72,6 @@ describe('TodoList.Views.Form', function() {
         expect(request).toHaveUrl('/tasks.json');
 
         var attributes = JSON.parse(request.requestBody);
-
         expect(attributes.task).toBeDefined();
         expect(attributes.task.name).toBeDefined();
         expect(attributes.task.name).toEqual('New task name');
@@ -85,7 +84,7 @@ describe('TodoList.Views.Form', function() {
         server.respondWith('POST', '/tasks.json',
             [
               200,
-              { "Content-Type":"application/json" },
+              { "Content-Type": "application/json" },
               JSON.stringify(fixtures)
             ]
         );
@@ -108,7 +107,7 @@ describe('TodoList.Views.Form', function() {
         server.respondWith('POST', '/tasks.json',
             [
               422,
-              { "Content-Type":"application/json" },
+              { "Content-Type": "application/json" },
               JSON.stringify({ errors: { name: "can't be blank" } })
             ]
         );
