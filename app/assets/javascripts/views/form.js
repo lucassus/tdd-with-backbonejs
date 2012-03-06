@@ -5,9 +5,10 @@ TodoList.Views.Form = Backbone.View.extend({
   },
 
   submit: function(event) {
-    event.preventDefault();
+    if (event) event.preventDefault();
 
     var attributes = this.getAttributes();
+    this.collection.create(attributes);
   },
 
   getAttributes: function() {
