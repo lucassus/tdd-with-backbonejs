@@ -12,15 +12,23 @@ describe('TodoList.Views.List', function () {
   });
 
   describe('collection', function () {
-    _.each(['reset', 'add'], function(event) {
-      describe('on ' + event + ' event', function () {
-        it('should call render', function() {
-          var spy = sinon.spy(collection, 'on');
-          view.initialize();
+    describe('on reset event', function () {
+      it('should call render', function() {
+        var spy = sinon.spy(collection, 'on');
+        view.initialize();
 
-          expect(spy.called).toBeTruthy();
-          expect(spy.calledWith(event, view.render, view));
-        });
+        expect(spy.called).toBeTruthy();
+        expect(spy.calledWith(event, view.render, view));
+      });
+    });
+
+    describe('on add event', function () {
+      it('should call render', function() {
+        var spy = sinon.spy(collection, 'on');
+        view.initialize();
+
+        expect(spy.called).toBeTruthy();
+        expect(spy.calledWith(event, view.appendTask, view));
       });
     });
   });

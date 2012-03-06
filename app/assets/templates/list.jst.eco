@@ -1,10 +1,5 @@
 <table class="table table-striped">
   <tbody>
-    <% for task in @tasks: %>
-      <tr>
-        <td>#<%= task.id %></td>
-        <td><%= task.getName() %></td>
-      </tr>
-    <% end %>
+
   </tbody>
 </table>
