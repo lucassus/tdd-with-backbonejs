@@ -7,18 +7,5 @@
 </form>
 
 <div id="tasks-list">
-  <table class="table table-striped">
-    <tbody>
-      <% @tasks.each do |task| %>
-        <tr>
-          <td>#<%= task.id %></td>
-          <td><%= task.name %></td>
-          <td>
-            <%= link_to 'Complete', task_path(task, :params => { :task => { :complete => true } }), :method => :put,
-                :class => 'complete btn btn-mini btn-success' %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+
 </div>

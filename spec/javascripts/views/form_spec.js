@@ -62,6 +62,9 @@ describe('TodoList.Views.Form', function() {
         view.submit();
 
         var request = server.requests[0];
+        expect(request).toHaveMethod('POST');
+        expect(request).toHaveUrl('/tasks.json');
+
         var attributes = JSON.parse(request.requestBody);
 
         expect(attributes.task).toBeDefined();

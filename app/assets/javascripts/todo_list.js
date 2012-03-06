@@ -1,4 +1,5 @@
 //= require_self
+//= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./views
@@ -14,6 +15,9 @@ window.TodoList = {
 
     var $form = $('form#new-task-form');
     var formView = new TodoList.Views.Form({ el: $form, collection: collection });
+
+    var list = new TodoList.Views.List({ collection: collection });
+    $('#tasks-list').html(list.render().el);
 
     collection.fetch();
   }
