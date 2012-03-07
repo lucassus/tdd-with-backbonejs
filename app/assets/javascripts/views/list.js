@@ -19,7 +19,7 @@ TodoList.Views.List = Backbone.View.extend({
   },
 
   appendTask: function(task) {
-    var view = new TodoList.Views.Task({model: task});
+    var view = new TodoList.Views.Task({ model: task });
     this.$('table tbody').append(view.render().el);
   }
 

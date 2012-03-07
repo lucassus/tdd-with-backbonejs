@@ -16,12 +16,25 @@ describe('TodoList.Models.Task', function() {
     expect(task.get('complete')).toBeFalsy();
   });
 
+  describe('#getId', function() {
+    it('should be defined', function() {
+      expect(task.getId).toBeDefined();
+    });
+
+    it('should return task id', function () {
+      var stub = sinon.stub(task, 'get').returns(11);
+
+      expect(task.getId()).toEqual(11);
+      expect(stub.calledWith('id')).toBeTruthy();
+    });
+  });
+
   describe('#getName', function() {
     it('should be defined', function() {
       expect(task.getName).toBeDefined();
     });
 
-    it('should return task id', function() {
+    it('should return task name', function() {
       var stub = sinon.stub(task, 'get').returns('Task name');
 
       expect(task.getName()).toEqual('Task name');

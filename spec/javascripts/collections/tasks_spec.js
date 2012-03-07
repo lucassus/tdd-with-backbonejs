@@ -43,9 +43,9 @@ describe('TodoList.Collections.Tasks', function() {
     describe('on success', function() {
       beforeEach(function() {
         var fixtures = { tasks: [
-          { id: 11, name: 'First task', complete: false },
-          { id: 12, name: 'Second task', complete: true }
-        ] };
+            { id: 11, name: 'First task', complete: false },
+            { id: 12, name: 'Second task', complete: true }
+          ] };
 
         server.respondWith('GET', '/tasks.json',
             [

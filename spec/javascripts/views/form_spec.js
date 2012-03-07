@@ -4,14 +4,14 @@ describe('TodoList.Views.Form', function() {
     expect(TodoList.Views.Form).toBeDefined();
   });
 
-  var view, $formFixture, collection;
+  var view, $fixture, collection;
 
   beforeEach(function() {
     loadFixtures('form-fixture.html');
-    $formFixture = $('#form-fixture');
+    $fixture = $('#form-fixture');
     collection = new TodoList.Collections.Tasks();
 
-    view = new TodoList.Views.Form({ el: $formFixture, collection: collection });
+    view = new TodoList.Views.Form({ el: $fixture, collection: collection });
   });
 
   describe('events', function() {
@@ -22,7 +22,7 @@ describe('TodoList.Views.Form', function() {
 
   describe('#getInputFor', function () {
     it('should return form input for given name', function () {
-      expect(view.getInputFor('name')).toBe($formFixture.find('input'));
+      expect(view.getInputFor('name')).toBe($fixture.find('input'));
     });
   });
 
@@ -32,7 +32,7 @@ describe('TodoList.Views.Form', function() {
     });
 
     it('should return valid attributes', function () {
-      $formFixture.find('input').val('Do something');
+      $fixture.find('input').val('Do something');
       var attributes = view.getAttributes();
 
       expect(attributes).toBeDefined();
@@ -64,7 +64,7 @@ describe('TodoList.Views.Form', function() {
 
     describe('sent request', function () {
       it('should send valid attributes to the server', function () {
-        $formFixture.find('input').val('New task name');
+        $fixture.find('input').val('New task name');
         view.submit();
 
         var request = server.requests[0];
@@ -91,7 +91,7 @@ describe('TodoList.Views.Form', function() {
       });
 
       it('should clear the form input', function () {
-        var $nameInput = $formFixture.find('input');
+        var $nameInput = $fixture.find('input');
         $nameInput.val('New task name');
 
         view.submit();
@@ -114,7 +114,7 @@ describe('TodoList.Views.Form', function() {
       });
 
       it('should display validation messages', function () {
-        var $nameInput = $formFixture.find('input');
+        var $nameInput = $fixture.find('input');
         $nameInput.val('');
 
         var mock = sinon.mock(window).expects('alert').withArgs("Task name can't be blank");

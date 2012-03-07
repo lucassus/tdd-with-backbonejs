@@ -17,6 +17,10 @@ TodoList.Models.Task = Backbone.Model.extend({
     return { task: this.attributes };
   },
 
+  getId: function() {
+    return this.get('id');
+  },
+
   getName: function() {
     return this.get('name');
   },
