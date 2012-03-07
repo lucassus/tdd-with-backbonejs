@@ -48,11 +48,11 @@ describe('TodoList.Collections.Tasks', function() {
           ] };
 
         server.respondWith('GET', '/tasks.json',
-            [
-              200,
-              { "Content-Type": "application/json" },
-              JSON.stringify(fixtures)
-            ]
+          [
+            200,
+            { "Content-Type": "application/json" },
+            JSON.stringify(fixtures)
+          ]
         );
 
         tasks.fetch();
