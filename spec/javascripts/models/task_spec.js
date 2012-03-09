@@ -66,9 +66,17 @@ describe('TodoList.Models.Task', function() {
       server.restore();
     });
 
-    describe('request', function() {
-      var request = null;
+    it('should send valid data', function() {
+      task.save({name: 'New task to do'});
+      var request = server.requests[0];
 
+      var params = JSON.parse(request.requestBody);
+      expect(params.task).toBeDefined();
+      expect(params.task.name).toEqual('New task to do');
+      expect(params.task.complete).toBeFalsy();
+    });
+
+    describe('request', function() {
       beforeEach(function() {
         task.set({ name: 'New task to do' });
       });
@@ -77,54 +85,24 @@ describe('TodoList.Models.Task', function() {
         beforeEach(function() {
           task.set({ id: null });
           task.save();
-          request = server.requests[0];
+          this.request = server.requests[0];
         });
 
-        it('should be POST', function() {
-          expect(request).toHaveMethod('POST');
-        });
-
-        it('should be async', function() {
-          expect(request).toBeAsync();
-        });
-
-        it('should have valid url', function() {
-          expect(request).toHaveUrl('/tasks.json');
-        });
-
-        it('should send valid data', function() {
-          var params = JSON.parse(request.requestBody);
-          expect(params.task).toBeDefined();
-          expect(params.task.name).toEqual('New task to do');
-          expect(params.task.complete).toBeFalsy();
-        });
+        itShouldBePOST();
+        itShouldBeAsync();
+        itShouldHaveUrl('/tasks.json');
       });
 
       describe('on update', function() {
         beforeEach(function() {
           task.id = 66;
           task.save();
-          request = server.requests[0];
+          this.request = server.requests[0];
         });
 
-        it('should be PUT', function() {
-          expect(request).toHaveMethod('PUT');
-        });
-
-        it('should be async', function() {
-          expect(request).toBeAsync();
-        });
-
-        it('should have valid url', function() {
-          expect(request).toHaveUrl('/tasks/66.json')
-        });
-
-        it('should send valid data', function() {
-          var params = JSON.parse(request.requestBody);
-          expect(params.task).toBeDefined();
-          expect(params.task.name).toEqual('New task to do');
-          expect(params.task.complete).toBeFalsy();
-        });
+        itShouldBePUT();
+        itShouldBeAsync();
+        itShouldHaveUrl('/tasks/66.json');
       });
     });
   });

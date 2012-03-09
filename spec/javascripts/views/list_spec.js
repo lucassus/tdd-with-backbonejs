@@ -12,6 +12,8 @@ describe('TodoList.Views.List', function () {
   });
 
   describe('collection', function () {
+    var event = { preventDefault: function() {} };
+
     describe('on reset event', function () {
       it('should call render', function() {
         var spy = sinon.spy(collection, 'on');
