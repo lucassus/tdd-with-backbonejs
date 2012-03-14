@@ -11,6 +11,16 @@ class TasksController < ApplicationController
     end
   end
 
+  def show
+    @task = Task.find(params[:id])
+
+    respond_to do |format|
+      format.json do
+        render :json => { :task => @task }
+      end
+    end
+  end
+
   def create
     todo = Task.new(params[:task])
     success = todo.save
