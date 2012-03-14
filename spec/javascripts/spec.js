@@ -3,6 +3,12 @@
 //= require_self
 //= require_tree .
 
+window.itShouldBeGET = function() {
+  it('should be POST', function() {
+    expect(this.request).toBeGET();
+  });
+};
+
 window.itShouldBePOST = function() {
   it('should be POST', function() {
     expect(this.request).toBePOST();
@@ -26,4 +32,3 @@ window.itShouldHaveUrl = function(url) {
     expect(this.request).toHaveUrl(url);
   });
 };
-
